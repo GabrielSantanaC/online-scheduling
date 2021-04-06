@@ -1,9 +1,10 @@
 import React from 'react';
+import Page from '../../components/Page';
 
 export default function index() {
   return (
-    <div>
-      Scheduled Page
-    </div>
+    <Page title="Scheduled Page">
+      my children
+    </Page>
   );
 }

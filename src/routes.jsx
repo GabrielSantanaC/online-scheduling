@@ -7,7 +7,7 @@ import Scheduled from './pages/Scheduled';
 const routes = [{
   componet: Home,
   path: '/',
-  name: 'Scheduling',
+  name: 'Home',
 }, {
   componet: Scheduled,
   path: '/scheduled',
