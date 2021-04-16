@@ -19,7 +19,7 @@ const Routes = () => (
     <Navbar routes={routes} />
     <Switch>
       {routes.map(({ path, componet }) => (
-        <Route exact path={path} component={componet} />
+        <Route key={path} exact path={path} component={componet} />
       ))}
     </Switch>
   </BrowserRouter>

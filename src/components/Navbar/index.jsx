@@ -2,7 +2,6 @@ import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-// eslint-disable-next-line react/prop-types
 export default function Header({ routes = [] }) {
   return (
     <div>
