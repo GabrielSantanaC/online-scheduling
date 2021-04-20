@@ -2,14 +2,14 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
-import Scheduled from './pages/Scheduled';
+import Scheduling from './pages/Scheduling';
 
 const routes = [{
   componet: Home,
   path: '/',
   name: 'Home',
 }, {
-  componet: Scheduled,
+  componet: Scheduling,
   path: '/scheduled',
   name: 'Scheduled',
 }];
