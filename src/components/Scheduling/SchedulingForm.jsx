@@ -23,6 +23,10 @@ const initialValues = {
   name: '',
   email: '',
   birth: '',
+  scheuling: '',
+  note: '',
+  priority: false,
+  completed: false,
 };
 
 const validationSchema = Yup.object({
@@ -58,6 +62,7 @@ function SchedulingForm() {
 
         <div className="form-group">
           <label className="mr-2" htmlFor="name">Birth Date</label>
+          <br />
           <Field
             as={DatePicker}
             className="form-control"
