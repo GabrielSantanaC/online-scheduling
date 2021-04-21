@@ -4,12 +4,12 @@ import { Field, ErrorMessage } from 'formik';
 import addDays from 'date-fns/addDays';
 import DateView from 'react-datepicker';
 
-function DatePicker({ label, name, ...rest }) {
+function SchedulingDate({ label, name, ...rest }) {
   return (
     <div className="form-group">
       <label htmlFor={name}>{label}</label>
       <br />
-      <Field name={name}>
+      <Field className="form-control" name={name}>
         {
             ({ form, field }) => {
               const { setFieldValue } = form;
@@ -19,11 +19,8 @@ function DatePicker({ label, name, ...rest }) {
                   id={name}
                   {...field}
                   {...rest}
-                  peekNextMonth
-                  showMonthDropdown
-                  showYearDropdown
-                  dropdownMode="select"
-                  maxDate={addDays(new Date(), 0)}
+                  minDate={addDays(new Date(), 1)}
+                  maxDate={addDays(new Date(), 15)}
                   selected={value}
                   onChange={(val) => setFieldValue(name, val)}
                 />
@@ -36,4 +33,4 @@ function DatePicker({ label, name, ...rest }) {
   );
 }
 
-export default DatePicker;
+export default SchedulingDate;

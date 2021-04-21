@@ -14,6 +14,13 @@ function SchedulingList() {
     return age;
   };
 
+  const showTimeOnly = (time) => {
+    const timeOnly = time.split('T')[1];
+    // eslint-disable-next-line no-unused-vars
+    const [hour, minute] = timeOnly.split(':');
+    return (`${hour}:${minute}`);
+  };
+
   const fetchData = async () => {
     try {
       const response = await axios.get('/scheduling');
@@ -59,7 +66,7 @@ function SchedulingList() {
 
   const handleEdit = (schedule) => {
     setEditSchedule(schedule);
-    setText(schedule?.note); // Opitional Chaining ?
+    setText(schedule?.note);
     setShowModal(!showModal);
   };
 
@@ -88,9 +95,11 @@ function SchedulingList() {
         <thead>
           <tr>
             <th>#</th>
-            <th width="35%">Patient</th>
+            <th width="30%">Patient</th>
             <th width="4%">Age</th>
-            <th width="25%">Note</th>
+            <th width="13%">Day</th>
+            <th width="6%">Hour</th>
+            <th width="20%">Note</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -109,9 +118,13 @@ function SchedulingList() {
                 {calculateAge(schedule.birth)}
 
               </td>
+              <td>
+                {schedule.dateScheduling.split('T')[0]}
+              </td>
+              <td>{showTimeOnly(schedule.timeScheduling)}</td>
               <td>{schedule.note}</td>
               <td>
-                <Button className="mr-2 mt-2" onClick={() => handleEdit(schedule)} type="button">{schedule.note ? 'Edit Note' : 'Add Note'}</Button>
+                <Button className="mr-2 mt-2" onClick={() => handleEdit(schedule)} type="button">{schedule.note ? 'Edit Note' : 'Note'}</Button>
                 <Button variant="danger" className="mt-2" onClick={() => handleRemove(schedule)} type="button">Remove</Button>
               </td>
             </tr>

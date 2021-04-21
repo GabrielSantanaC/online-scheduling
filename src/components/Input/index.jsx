@@ -7,7 +7,7 @@ function index({ label, name, ...rest }) {
     <div className="form-group">
       <label htmlFor={name}>{label}</label>
       <br />
-      <Field id={name} name={name} {...rest} />
+      <Field className="form-control" id={name} name={name} {...rest} />
       <ErrorMessage name={name}>{(msg) => <div className="text-danger">{msg}</div>}</ErrorMessage>
     </div>
   );

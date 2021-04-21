@@ -10,8 +10,8 @@ const routes = [{
   name: 'Home',
 }, {
   componet: Scheduling,
-  path: '/scheduled',
-  name: 'Scheduled',
+  path: '/scheduling',
+  name: 'Scheduling',
 }];
 
 const Routes = () => (

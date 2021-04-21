@@ -24,7 +24,8 @@ const initialValues = {
   email: '',
   note: '',
   birth: null,
-  scheduling: null,
+  dateScheduling: null,
+  timeScheduling: null,
   priority: false,
   completed: false,
 };
@@ -33,7 +34,8 @@ const validationSchema = Yup.object({
   name: Yup.string().required('Required'),
   email: Yup.string().email('Invalid email format').required('Required'),
   birth: Yup.date().required('Required').nullable(),
-  scheduling: Yup.date().required('Required').nullable(),
+  dateScheduling: Yup.date().required('Required').nullable(),
+  timeScheduling: Yup.date().required('Required').nullable(),
 });
 
 function SchedulingForm() {
@@ -50,12 +52,16 @@ function SchedulingForm() {
           </div>
 
           <div>
-            <FormikControl name="birth" label="Birth Date" control="datepicker" />
+            <FormikControl name="birth" label="Birth Date" control="datebirth" />
           </div>
 
-          <di>
-            {formik.values.birth && <FormikControl name="scheduling" label="Choose a Date" control="datepicker" /> }
-          </di>
+          <div>
+            {formik.values.birth && <FormikControl name="dateScheduling" label="Scheduling Day" control="datescheduling" /> }
+          </div>
+
+          <div>
+            {formik.values.dateScheduling && <FormikControl datescheduling={formik.values.dateScheduling} name="timeScheduling" label="Scheduling Time" control="timescheduling" /> }
+          </div>
 
           <Button variant="secondary" className="mt-4" type="submit">Submit</Button>
         </Form>
