@@ -9,6 +9,11 @@ function SchedulingList() {
   const [text, setText] = useState('');
   const [showModal, setShowModal] = useState(false);
 
+  const calculateAge = (birth) => {
+    const age = Math.floor((new Date() - new Date(birth).getTime()) / 3.15576e+10);
+    return age;
+  };
+
   const fetchData = async () => {
     try {
       const response = await axios.get('/scheduling');
@@ -84,7 +89,7 @@ function SchedulingList() {
           <tr>
             <th>#</th>
             <th width="35%">Patient</th>
-            <th>Age</th>
+            <th width="4%">Age</th>
             <th width="25%">Note</th>
             <th>Actions</th>
           </tr>
@@ -100,11 +105,14 @@ function SchedulingList() {
                 />
               </td>
               <td>{schedule.name}</td>
-              <td>{schedule.birth}</td>
+              <td>
+                {calculateAge(schedule.birth)}
+
+              </td>
               <td>{schedule.note}</td>
               <td>
-                <Button className="mr-2" onClick={() => handleEdit(schedule)} type="button">{schedule.note ? 'Edit Note' : 'Add Note'}</Button>
-                <Button variant="danger" onClick={() => handleRemove(schedule)} type="button">Remove</Button>
+                <Button className="mr-2 mt-2" onClick={() => handleEdit(schedule)} type="button">{schedule.note ? 'Edit Note' : 'Add Note'}</Button>
+                <Button variant="danger" className="mt-2" onClick={() => handleRemove(schedule)} type="button">Remove</Button>
               </td>
             </tr>
           ))}
