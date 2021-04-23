@@ -14,13 +14,6 @@ function SchedulingList() {
     return age;
   };
 
-  const showTimeOnly = (time) => {
-    const timeOnly = time.split('T')[1];
-    // eslint-disable-next-line no-unused-vars
-    const [hour, minute] = timeOnly.split(':');
-    return (`${hour}:${minute}`);
-  };
-
   const fetchData = async () => {
     try {
       const response = await axios.get('/scheduling');
@@ -119,9 +112,9 @@ function SchedulingList() {
 
               </td>
               <td>
-                {schedule.dateScheduling.split('T')[0]}
+                {new Date(schedule.dateScheduling).toLocaleDateString()}
               </td>
-              <td>{showTimeOnly(schedule.timeScheduling)}</td>
+              <td>{`${new Date(schedule.timeScheduling).getHours()}:00`}</td>
               <td>{schedule.note}</td>
               <td>
                 <Button className="mr-2 mt-2" onClick={() => handleEdit(schedule)} type="button">{schedule.note ? 'Edit Note' : 'Note'}</Button>
