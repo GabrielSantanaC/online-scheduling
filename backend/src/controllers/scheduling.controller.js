@@ -1,18 +1,56 @@
 const SchedulingModel = require("../models/scheduling.model");
 
 class Scheduling {
-  async index(request, response) {
+  async index(req, res) {
     const schedules = await SchedulingModel.find();
 
-    response.send({ schedules });
+    res.send({ schedules });
   }
 
-  async store(request, response) {
-    const body = request.body;
+  async store(req, res) {
+    const body = req.body;
 
     const scheduling = await SchedulingModel.create(body);
 
-    response.send({ scheduling });
+    res.send({ scheduling });
+  }
+
+  async getOne(req, res) {
+    const { id } = req.params;
+
+    try {
+      const scheduling = await SchedulingModel.findById(id);
+      res.send({ scheduling });
+    } catch (error) {
+      res.status(400).json({ message: "An unexpected error happened" });
+    }
+  }
+
+  async remove(req, res) {
+    const { id } = req.params;
+    try {
+      const scheduling = await SchedulingModel.findById(id);
+      if (!scheduling) {
+        return res.send({ message: "Scheduling not exist" });
+      }
+      await scheduling.remove();
+      res.send({ message: "Scheduling removed" });
+    } catch (error) {
+      res.status(400).json({ message: "Scheduling not found" });
+    }
+  }
+
+  async update(req, res) {
+    const {
+      body,
+      params: { id },
+    } = req;
+
+    const scheduling = await SchedulingModel.findByIdAndUpdate(id, body, {
+      new: true,
+    });
+
+    res.send({ message: scheduling });
   }
 }
 

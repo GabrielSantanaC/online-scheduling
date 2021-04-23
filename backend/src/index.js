@@ -1,9 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
+require('dotenv').config()
 
-const SchedulingController = require("./controllers/scheduling.controller");
+const SchedulingRouter = require('./routes/scheduling.route')
 
-mongoose.connect("url", {
+const {MONGO_URL, HTTP_PORT} = process.env
+
+mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -12,14 +15,8 @@ const app = express();
 
 app.use(express.json())
 
-app.get("/scheduling", (request, response) =>
-  SchedulingController.index(request, response)
-);
+app.use('/api', SchedulingRouter)
 
-app.post("/scheduling", (request, response) =>
-  SchedulingController.store(request, response)
-);
-
-app.listen(3333, () => {
-  console.log("Rodando na porta 3333");
+app.listen(HTTP_PORT, () => {
+  console.log(`Rodando na porta ${HTTP_PORT}`);
 });
