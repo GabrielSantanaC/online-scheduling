@@ -20,6 +20,9 @@ class Scheduling {
 
     try {
       const scheduling = await SchedulingModel.findById(id);
+      if (!scheduling) {
+        return res.send({ message: "Not found" });
+      }
       res.send({ scheduling });
     } catch (error) {
       res.status(400).json({ message: "An unexpected error happened" });
@@ -46,11 +49,15 @@ class Scheduling {
       params: { id },
     } = req;
 
-    const scheduling = await SchedulingModel.findByIdAndUpdate(id, body, {
-      new: true,
-    });
+    try {
+      const scheduling = await SchedulingModel.findByIdAndUpdate(id, body, {
+        new: true,
+      });
 
-    res.send({ message: scheduling });
+      res.send({ message: scheduling });
+    } catch (error) {
+      res.status(404).send({ message: "An unexpected error happened" });
+    }
   }
 }
 
