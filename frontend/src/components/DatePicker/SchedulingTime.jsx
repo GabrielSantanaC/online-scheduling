@@ -40,7 +40,6 @@ function SchedulingTime({
                 timeIntervals={60}
                 timeCaption="Time"
                 showTimeSelect
-                disabled={excludeTime.length}
                 excludeTimes={excludeTime.map((t) => (
                   setHours(setMinutes(new Date(), 0), t)
                 ))}
